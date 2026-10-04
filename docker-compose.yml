@@ -1,0 +1,15 @@
+services:
+  royalty:
+    build: .
+    image: royalty-service:latest
+    container_name: royalty-service
+    ports:
+      - "8000:8000"          # 宿主机端口:容器端口，可改左侧
+    environment:
+      ROYALTY_DB_PATH: /data/royalty.db
+    volumes:
+      - royalty-data:/data   # 持久化 SQLite 数据
+    restart: unless-stopped
+
+volumes:
+  royalty-data:
